@@ -38,17 +38,19 @@ public class PetMain{
                 case 3:
                     phoneNumber = consoleView.inputPhoneNumber();
                     List<MedicalRecord> record = recordController.findRecord(phoneNumber);
-                    List<Customer> customer = customerController.findCustomer(phoneNumber);
-
-                    if(record == null){
+                    Customer customer = customerController.findCustomer(phoneNumber);
+                    if(record.isEmpty()){
                         consoleView.printMessage("해당 전화번호를 가진 진료 기록이 없습니다.");
                     }
-                        consoleView.recoardPrint((Customer) customer, (MedicalRecord) record);
+                        consoleView.recoardPrint(customer, record);
+                    break;
                 case 4:
+                    recordController.removeRecord(consoleView.inputPhoneNumber());
                     consoleView.printMessage("진료기록 정보가 삭제되었습니다.");
                     break;
                 case 5:
                     consoleView.printMessage("프로그램을 종료합니다.");
+                    return;
                 default:
                     consoleView.printMessage("잘못입력하였습니다.");
             }

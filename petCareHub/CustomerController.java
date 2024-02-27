@@ -27,12 +27,10 @@ public class CustomerController {
         return false;
     }
     //해당 고객 찾기
-    public List<Customer> findCustomer(String phoneNumber){
-        List<Customer> customerResult = new ArrayList<Customer>();
+    public Customer findCustomer(String phoneNumber){
         for(Customer result: customers){
             if(result.getPhoneNumber().equals(phoneNumber)){
-                customerResult.add(result);
-                return customerResult;
+                return result;
             }
         }
         return null;

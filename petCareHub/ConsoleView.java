@@ -44,7 +44,8 @@ public class ConsoleView{
         return phoneNumber;
     }
     // 3. 진료기록 출력
-    public void recoardPrint(Customer customer, MedicalRecord record){
+    public void recoardPrint(Customer customer, List<MedicalRecord> records){
+        for(MedicalRecord record : records){
         System.out.println("["+customer.getPetName()+"]의 진료기록");
         System.out.println("진료일: "+record.getMedicalDate());
         System.out.println("진료내용: "+record.getMedicalContent());
@@ -53,6 +54,7 @@ public class ConsoleView{
         System.out.println("주소: "+customer.getAddress());
         System.out.println("종류: "+customer.getPetKind());
         System.out.println("출생년도: "+customer.getBirth());
+        }
     }
 
     // 기능별 메세지 출력
