@@ -9,7 +9,7 @@ public class Main {
         BankService bankService = new BankService();
 
         //user와 account 생성 //1
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i <= 10; i++) {
             bankService.createAccount(i,"user " + i, i, 0);
         }
 
