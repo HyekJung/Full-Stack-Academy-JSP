@@ -26,26 +26,26 @@ public class BankService {
     public void deposit(int price, long accountNumber) {
         BankAccount bankAccount = accountMap.get(accountNumber);
 
-        if (bankAccount != null) {
+        if (bankAccount == null) {
+            throw new IllegalArgumentException("없는 계좌입니다. 계좌번호를 확인해주세요.");
+        } else {
             bankAccount.getAccount().deposit(price);
             bankAccount.getAccount().setMessage(price + " 원이 입금되었습니다.");
             System.out.println(bankAccount.getAccount().getMessage());
-        } else {
-            throw new IllegalArgumentException("없는 계좌입니다. 계좌번호를 확인해주세요.");
         }
     }
 
     public void withdraw(int price, long accountNumber) {
         BankAccount bankAccount = accountMap.get(accountNumber);
 
-        if (bankAccount != null) {
+        if (bankAccount == null) {
+            throw new IllegalArgumentException("없는 계좌입니다. 계좌번호를 확인해주세요.");
+        } else {
             if (bankAccount.getAccount().getBalance() >= price) {
                 bankAccount.getAccount().withdraw(price);
                 bankAccount.getAccount().setMessage(price + " 원이 출금되었습니다.");
                 System.out.println(bankAccount.getAccount().getMessage());
             }
-        } else {
-            throw new IllegalArgumentException("없는 계좌입니다. 계좌번호를 확인해주세요.");
         }
     }
 
@@ -53,7 +53,9 @@ public class BankService {
         BankAccount fromAccount = accountMap.get(fromAccountNumber); //받는 분
         BankAccount toAccount = accountMap.get(toAccountNumber); //보내는 분
 
-        if (fromAccount != null && toAccount != null) {
+        if (fromAccount == null && toAccount == null) {
+            throw new IllegalArgumentException("계좌번호를 확인해주세요.");
+        } else {
             //입금
             toAccount.getAccount().deposit(price);
             toAccount.getAccount().setMessage(
@@ -65,9 +67,6 @@ public class BankService {
             fromAccount.getAccount().setMessage(
                     fromAccount.getUser().getName() + "님의 현재 잔액은 " + fromAccount.getAccount().getBalance() + " 입니다.");
             System.out.println(fromAccount.getAccount().getMessage());
-        } else {
-            throw new IllegalArgumentException("계좌번호를 확인해주세요.");
         }
     }
-
 }
