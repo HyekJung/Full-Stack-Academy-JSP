@@ -187,6 +187,49 @@ class BankServiceTest {
 
         //then
         assertEquals("계좌번호를 확인해주세요.", exception.getMessage());
+    }
 
+    @DisplayName("historySuccess : 거래내역 출력을 성공한다.")
+    @Test
+    public void historySuccess(){
+        //given
+        long id1 = 1;
+        String user1 = "user1";
+        long accountNumber1 = 1;
+        int balance1 = 10;
+
+        BankService bankService = new BankService();
+        bankService.createAccount(id1, user1, accountNumber1, balance1);
+
+        bankService.deposit(10, accountNumber1); //거래내역 생성
+
+        //when
+        bankService.transactionHistory(accountNumber1, user1);
+
+        //then
+        assertEquals(1,
+                bankService.accountMap.get(accountNumber1).getAccount().getTransactionList().size());
+    }
+
+    @DisplayName("historyFail : 거래내역 출력을 실패한다.")
+    @Test
+    public void historyFail(){
+        //given
+        long id1 = 1;
+        String user1 = "user1";
+        long accountNumber1 = 1;
+        int balance1 = 10;
+
+        BankService bankService = new BankService();
+        bankService.createAccount(id1, user1, accountNumber1, balance1);
+
+        bankService.deposit(10, accountNumber1); //거래내역 생성
+
+        //when
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                bankService.transactionHistory(accountNumber1, "user999"));
+
+        //then
+        assertEquals("계좌번호 또는 이름을 확인해주세요.", exception.getMessage());
     }
 }

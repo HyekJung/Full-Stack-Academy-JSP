@@ -16,4 +16,10 @@ public class BankAccount {
     public User getUser() {
         return user;
     }
+
+    public void transactionHistory(){
+        for (Transaction history : account.getTransactionList()){
+            System.out.println(history.toString());
+        }
+    }
 }

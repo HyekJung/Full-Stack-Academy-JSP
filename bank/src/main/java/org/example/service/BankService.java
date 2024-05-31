@@ -53,7 +53,7 @@ public class BankService {
         BankAccount fromAccount = accountMap.get(fromAccountNumber); //받는 분
         BankAccount toAccount = accountMap.get(toAccountNumber); //보내는 분
 
-        if (fromAccount == null && toAccount == null) {
+        if (fromAccount == null || toAccount == null) {
             throw new IllegalArgumentException("계좌번호를 확인해주세요.");
         } else {
             //입금
@@ -69,4 +69,13 @@ public class BankService {
             System.out.println(fromAccount.getAccount().getMessage());
         }
     }
+
+    public void transactionHistory(long accountNumber, String user){
+        BankAccount bankAccount = accountMap.get(accountNumber);
+        if (bankAccount == null || bankAccount.getUser().getName() != user) {
+            throw new IllegalArgumentException("계좌번호 또는 이름을 확인해주세요.");
+        }
+        bankAccount.transactionHistory();
+    }
 }
+

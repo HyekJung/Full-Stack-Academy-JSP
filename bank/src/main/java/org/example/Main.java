@@ -16,5 +16,6 @@ public class Main {
         bankService.deposit(10, 1); //2
         bankService.withdraw(5, 1); //3
         bankService.transfer(3, 1, 2); //4
+        bankService.transactionHistory(1, "user 1");
     }
 }
